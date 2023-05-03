@@ -15,6 +15,8 @@ export const MedicationDetails = () => {
   const medication = useMedication();
   const { isFeatureEnabled } = useFeatureEnabled();
 
+  console.log('isFeatureEnabled', isFeatureEnabled);
+
   if (!isFeatureEnabled || !medication) return null;
 
   return (

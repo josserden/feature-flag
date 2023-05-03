@@ -6,7 +6,17 @@ interface PageLayoutProps {
   className: string;
 }
 
-export const PageLayout = ({ children, className }: PageLayoutProps) => {
+// Problem:
+//     This should be conditionally rendered based on feature flag enrolment.
+// Feature flag name:
+//     general-render-launch-banner
+// Setup:
+//     Show to users with flag value: true
+
+export const PageLayout = ({
+  children,
+  className,
+}: PageLayoutProps): JSX.Element => {
   return (
     <div className={`page-layout ${className}`}>
       <PromotionalBanner />

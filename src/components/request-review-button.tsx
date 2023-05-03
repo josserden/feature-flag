@@ -12,6 +12,8 @@ import { DEFAULT_BG_COLOR } from '../utils/constants';
 export const RequestReviewButton = () => {
   const { backgroundColor } = useRequestReviewButton();
 
+  console.log('backgroundColor', backgroundColor);
+
   return (
     <button
       style={{

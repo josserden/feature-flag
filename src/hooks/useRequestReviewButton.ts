@@ -8,14 +8,19 @@ export const useRequestReviewButton = () => {
     useState<string>(DEFAULT_BG_COLOR);
 
   useEffect(() => {
-    client.on('ready', () => {
-      const backgroundColorFlag = client.variation(
-        detailsCtaFlagKey,
-        DEFAULT_BG_COLOR,
-      );
+    client
+      .waitUntilReady()
+      .then(() => {
+        const backgroundColorFlag = client.variation(
+          detailsCtaFlagKey,
+          DEFAULT_BG_COLOR,
+        );
 
-      setBackgroundColor(backgroundColorFlag);
-    });
+        setBackgroundColor(backgroundColorFlag);
+      })
+      .catch(err => {
+        console.error('Error: ', err);
+      });
   }, []);
 
   return { backgroundColor };

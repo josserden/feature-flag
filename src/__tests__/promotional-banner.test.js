@@ -1,7 +1,21 @@
 import { render, screen } from '@testing-library/react';
 import { PromotionalBanner } from '../components/promotional-banner';
+
 import { MESSAGE } from '../utils/constants';
 
+jest.mock('uuid', () => {
+  const base = '9134e286-6f71-427a-bf00-';
+  let current = 100000000000;
+
+  return {
+    v4: () => {
+      const uuid = base + current.toString();
+      current++;
+
+      return uuid;
+    },
+  };
+});
 /* *
  * This scenario tests the rendering of a component called PromotionalBanner based on the value returned by the variation method of a client object. There are two tests:
  *

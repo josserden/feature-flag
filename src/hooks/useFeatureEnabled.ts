@@ -7,11 +7,18 @@ export const useFeatureEnabled = () => {
   const [isFeatureEnabled, setIsFeatureEnabled] = useState<boolean>(TURN.OFF);
 
   useEffect(() => {
-    const flagValue = client.variation(profileSectionFlagKey, 'variation');
+    client
+      .waitUntilReady()
+      .then(() => {
+        const flagValue = client.variation(profileSectionFlagKey, 'variation');
 
-    if (flagValue === 'variation') {
-      setIsFeatureEnabled(TURN.ON);
-    }
+        if (flagValue === 'variation') {
+          setIsFeatureEnabled(TURN.ON);
+        }
+      })
+      .catch(err => {
+        console.error('Error: ', err);
+      });
   }, []);
 
   return { isFeatureEnabled };
